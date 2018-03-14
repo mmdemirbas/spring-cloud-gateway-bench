@@ -1,6 +1,15 @@
 server:
   port: 8082
 
+spring:
+  cloud:
+    gateway:
+      routes:
+      - id: all_route
+        uri: http://localhost:8000
+        predicates:
+        - Path=/**
+
 #logging:
 #  level:
 #    org.springframework.cloud.gateway: TRACE
