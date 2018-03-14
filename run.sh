@@ -210,7 +210,7 @@ function runStatic() {
         echo "Googling"
         exit "1"
     fi
-
+    cd -
 }
 
 function runZuul() {
@@ -237,6 +237,7 @@ function runGateway1() {
     mvn clean package > "../logs/gateway1-build.log"
     echo "> run"
     java -jar target/gateway1-0.0.1-SNAPSHOT.jar > "../logs/gateway1.log" &
+    cd -
 }
 
 function runGateway2() {
@@ -250,6 +251,7 @@ function runGateway2() {
     mvn clean package > "../logs/gateway2-build.log"
     echo "> run"
     java -jar target/gateway2-0.0.1-SNAPSHOT.jar > "../logs/gateway2.log" &
+    cd -
 }
 
 function runLinkerd() {
@@ -261,6 +263,7 @@ function runLinkerd() {
     echo "$server_host $server_port" > "./disco/web"
     echo "> run"
     java -jar linkerd-1.3.4.jar linkerd.yaml &> "../logs/linkerd.log" &
+    cd -
 }
 
 # trap ctrl-c and call ctrl_c()
