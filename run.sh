@@ -224,6 +224,7 @@ function runZuul() {
     mvn clean package > "../logs/zuul-build.log"
     echo "> run"
     java -jar target/zuul-0.0.1-SNAPSHOT.jar > "../logs/zuul.log" &
+    cd -
 }
 
 function runGateway1() {
