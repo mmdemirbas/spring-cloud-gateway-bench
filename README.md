@@ -1,6 +1,9 @@
 Spring Cloud Gateway Benchmark
 =======
 
+**Use `run.sh` to run client, server and/or gateways.**
+
+
 TL;DR
 
 Proxy | Avg Latency | Avg Req/Sec/Thread
@@ -10,7 +13,6 @@ linkered | 7.62ms | 2.82k
 zuul | 12.56ms | 2.09k
 none | 2.09ms | 11.77k
 
-Use `run.sh` to run client, server and/or gateways.
 
 ## Terminal 1 (simple webserver)
 
