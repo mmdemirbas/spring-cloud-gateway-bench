@@ -189,12 +189,18 @@ setup
 
 function runStatic() {
 
+    echo "Running Web server at $server_host:$server_port"
+
     cd static
     if [ "$PLATFORM" == "$OSX" ]; then
+        echo "> build"
         GOOS=darwin GOARCH=amd64 go build -o webserver.darwin-amd64 webserver.go
+        echo "> run"
         ./webserver.darwin-amd64 >> "../logs/webserver.log"
     elif [ "$PLATFORM" == "$LINUX" ]; then
+        # echo "> build"
         # go build -o webserver webserver.go
+        echo "> run"
         ./webserver >> "../logs/webserver.log"
         exit "1"
     elif [ "$PLATFORM" == "$WIN" ]; then
@@ -212,8 +218,11 @@ function runZuul() {
     echo "Running Zuul at $gateway_host:$zuul_port"
 
     cd zuul
+    echo "> configure"
     sed -i "" -e "s/\(\s*url:\).*/\1 http:\/\/$server_host:$server_port/g" "./src/main/resources/application.yml"
+    echo "> build"
     mvn clean package > "../logs/zuul-build.log"
+    echo "> run"
     java -jar target/zuul-0.0.1-SNAPSHOT.jar > "../logs/zuul.log"
 }
 
@@ -222,8 +231,11 @@ function runGateway1() {
     echo "Running Spring Gateway 1 at $gateway_host:$gateway1_port"
 
     cd gateway1
+    echo "> configure"
     sed -i "" -e "s/\(\s*uri:\).*/\1 http:\/\/$server_host:$server_port/g" "./src/main/resources/application.yml"
+    echo "> build"
     mvn clean package > "../logs/gateway1-build.log"
+    echo "> run"
     java -jar target/gateway1-0.0.1-SNAPSHOT.jar > "../logs/gateway1.log"
 }
 
@@ -232,8 +244,11 @@ function runGateway2() {
     echo "Running Spring Gateway 2 at $gateway_host:$gateway2_port"
 
     cd gateway2
+    echo "> configure"
     sed -i "" -e "s/\(\s*uri:\).*/\1 http:\/\/$server_host:$server_port/g" "./src/main/resources/application.yml"
+    echo "> build"
     mvn clean package > "../logs/gateway2-build.log"
+    echo "> run"
     java -jar target/gateway2-0.0.1-SNAPSHOT.jar > "../logs/gateway2.log"
 }
 
@@ -242,7 +257,9 @@ function runLinkerd() {
     echo "Running Linkerd at $gateway_host:$linkerd_port"
 
     cd linkerd
+    echo "> configure"
     echo "$server_host $server_port" > "./disco/web"
+    echo "> run"
     java -jar linkerd-1.3.4.jar linkerd.yaml &> "../logs/linkerd.log"
 }
 
@@ -256,7 +273,7 @@ function ctrl_c() {
         exit "1"
 }
 
-if [ $server = true ]; then
+if [ "${server}" = true ]; then
     #Run Static web server
     runStatic &
 
@@ -265,7 +282,7 @@ if [ $server = true ]; then
     response="$(curl http://${server_host}:${server_port}/hello.txt 2> /dev/null)"
     if [ '{output:"I Love Spring Cloud"}' != "${response}" ]; then
         echo
-        echo "Problem running static webserver, response: $response"
+        echo "Problem running static webserver, response: \`$response\`"
         echo
         exit "1"
     fi;
@@ -285,7 +302,7 @@ function runGateways() {
 
 }
 
-if [ $gateway = true ]; then
+if [ "${gateway}" = true ]; then
     runGateways
 fi
 
@@ -295,26 +312,26 @@ function warmup() {
 
     echo "JVM Warmup"
 
-    total_run=10
-    for run in {1..$total_run}
+    total_run="10"
+    for run in {1..${total_run}}
     do
         echo "Gateway1 $run/$total_run"
         wrk -t "10" -c "200" -d 30s http://${gateway_host}:${gateway1_port}/hello.txt >> ./reports/gateway1.txt
     done
 
-    for run in {1..$total_run}
+    for run in {1..${total_run}}
     do
         echo "Gateway2 $run/$total_run"
         wrk -t "10" -c "200" -d 30s http://${gateway_host}:${gateway2_port}/hello.txt >> ./reports/gateway2.txt
     done
 
-    for run in {1..$total_run}
+    for run in {1..${total_run}}
     do
         echo "Linkerd $run/$total_run"
         wrk -H "Host: web" -t "10" -c "200" -d 30s http://${gateway_host}:${linkerd_port}/hello.txt >> ./reports/linkerd.txt
     done
 
-    for run in {1..$total_run}
+    for run in {1..${total_run}}
     do
         echo "Zuul $run/$total_run"
         wrk -t "10" -c "200" -d 30s http://${gateway_host}:${zuul_port}/hello.txt >> ./reports/zuul.txt
@@ -332,7 +349,7 @@ function runPerformanceTests() {
     warmup
 }
 
-if [ $client = true ]; then
+if [ "${client}" = true ]; then
     runPerformanceTests
 fi
 
