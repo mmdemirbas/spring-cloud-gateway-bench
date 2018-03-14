@@ -223,7 +223,7 @@ function runZuul() {
     echo "> build"
     mvn clean package > "../logs/zuul-build.log"
     echo "> run"
-    java -jar target/zuul-0.0.1-SNAPSHOT.jar > "../logs/zuul.log" &
+    java -jar "./target/zuul-0.0.1-SNAPSHOT.jar" > "../logs/zuul.log" &
     cd -
 }
 
@@ -237,7 +237,7 @@ function runGateway1() {
     echo "> build"
     mvn clean package > "../logs/gateway1-build.log"
     echo "> run"
-    java -jar target/gateway1-0.0.1-SNAPSHOT.jar > "../logs/gateway1.log" &
+    java -jar "./target/gateway1-0.0.1-SNAPSHOT.jar" > "../logs/gateway1.log" &
     cd -
 }
 
@@ -251,7 +251,7 @@ function runGateway2() {
     echo "> build"
     mvn clean package > "../logs/gateway2-build.log"
     echo "> run"
-    java -jar target/gateway2-0.0.1-SNAPSHOT.jar > "../logs/gateway2.log" &
+    java -jar "./target/gateway2-0.0.1-SNAPSHOT.jar" > "../logs/gateway2.log" &
     cd -
 }
 
@@ -263,7 +263,7 @@ function runLinkerd() {
     echo "> configure"
     echo "$server_host $server_port" > "./disco/web"
     echo "> run"
-    java -jar linkerd-1.3.4.jar linkerd.yaml &> "../logs/linkerd.log" &
+    java -jar "./linkerd-1.3.4.jar" linkerd.yaml &> "../logs/linkerd.log" &
     cd -
 }
 
