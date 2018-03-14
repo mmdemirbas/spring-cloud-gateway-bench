@@ -6,11 +6,11 @@ zuul:
   include-debug-header: true
 
 server:
-  port: 8081
+  port: 8080
 
 management:
   endpoints:
     web:
       expose: '*'
   server:
-    port: 8181
+    port: 8180
