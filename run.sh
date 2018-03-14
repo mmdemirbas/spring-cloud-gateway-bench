@@ -219,7 +219,7 @@ function runZuul() {
 
     cd zuul
     echo "> configure"
-    sed -i "" -e "s/\(\s*url:\).*/\1 http:\/\/$server_host:$server_port/g" "./src/main/resources/application.yml"
+    sed -i "s/\(\s*url:\).*/\1 http:\/\/$server_host:$server_port/g" "./src/main/resources/application.yml"
     echo "> build"
     mvn clean package > "../logs/zuul-build.log"
     echo "> run"
@@ -232,7 +232,7 @@ function runGateway1() {
 
     cd gateway1
     echo "> configure"
-    sed -i "" -e "s/\(\s*uri:\).*/\1 http:\/\/$server_host:$server_port/g" "./src/main/resources/application.yml"
+    sed -i "s/\(\s*uri:\).*/\1 http:\/\/$server_host:$server_port/g" "./src/main/resources/application.yml"
     echo "> build"
     mvn clean package > "../logs/gateway1-build.log"
     echo "> run"
@@ -245,7 +245,7 @@ function runGateway2() {
 
     cd gateway2
     echo "> configure"
-    sed -i "" -e "s/\(\s*uri:\).*/\1 http:\/\/$server_host:$server_port/g" "./src/main/resources/application.yml"
+    sed -i "s/\(\s*uri:\).*/\1 http:\/\/$server_host:$server_port/g" "./src/main/resources/application.yml"
     echo "> build"
     mvn clean package > "../logs/gateway2-build.log"
     echo "> run"
