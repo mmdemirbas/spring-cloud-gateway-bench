@@ -196,12 +196,12 @@ function runStatic() {
         echo "> build"
         GOOS=darwin GOARCH=amd64 go build -o webserver.darwin-amd64 webserver.go
         echo "> run"
-        ./webserver.darwin-amd64 >> "../logs/webserver.log"
+        ./webserver.darwin-amd64 >> "../logs/webserver.log" &
     elif [ "$PLATFORM" == "$LINUX" ]; then
         # echo "> build"
         # go build -o webserver webserver.go
         echo "> run"
-        ./webserver >> "../logs/webserver.log"
+        ./webserver >> "../logs/webserver.log" &
         exit "1"
     elif [ "$PLATFORM" == "$WIN" ]; then
         echo "Googling"
@@ -223,7 +223,7 @@ function runZuul() {
     echo "> build"
     mvn clean package > "../logs/zuul-build.log"
     echo "> run"
-    java -jar target/zuul-0.0.1-SNAPSHOT.jar > "../logs/zuul.log"
+    java -jar target/zuul-0.0.1-SNAPSHOT.jar > "../logs/zuul.log" &
 }
 
 function runGateway1() {
@@ -236,7 +236,7 @@ function runGateway1() {
     echo "> build"
     mvn clean package > "../logs/gateway1-build.log"
     echo "> run"
-    java -jar target/gateway1-0.0.1-SNAPSHOT.jar > "../logs/gateway1.log"
+    java -jar target/gateway1-0.0.1-SNAPSHOT.jar > "../logs/gateway1.log" &
 }
 
 function runGateway2() {
@@ -249,7 +249,7 @@ function runGateway2() {
     echo "> build"
     mvn clean package > "../logs/gateway2-build.log"
     echo "> run"
-    java -jar target/gateway2-0.0.1-SNAPSHOT.jar > "../logs/gateway2.log"
+    java -jar target/gateway2-0.0.1-SNAPSHOT.jar > "../logs/gateway2.log" &
 }
 
 function runLinkerd() {
@@ -260,7 +260,7 @@ function runLinkerd() {
     echo "> configure"
     echo "$server_host $server_port" > "./disco/web"
     echo "> run"
-    java -jar linkerd-1.3.4.jar linkerd.yaml &> "../logs/linkerd.log"
+    java -jar linkerd-1.3.4.jar linkerd.yaml &> "../logs/linkerd.log" &
 }
 
 # trap ctrl-c and call ctrl_c()
@@ -275,7 +275,7 @@ function ctrl_c() {
 
 if [ "${server}" = true ]; then
     #Run Static web server
-    runStatic &
+    runStatic
 
     echo "Verifying static webserver is running at $server_host:$server_port"
 
@@ -295,10 +295,10 @@ fi
 function runGateways() {
 
     echo "Run Gateways"
-    runZuul &
-    runGateway1 &
-    runGateway2 &
-    runLinkerd &
+    runZuul
+    runGateway1
+    runGateway2
+    runLinkerd
 
 }
 
