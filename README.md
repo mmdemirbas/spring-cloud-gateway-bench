@@ -40,6 +40,9 @@ to add gateway1 and make running on EC2 easier.
     `<gateway-host>` with the actual IP address or hostname of the _gateway_ machine.
 9.  Wait to see `Script Finished` message in _client_ machine's console.
 10. Inspect reports saved under `./reports` directory.
+11. When you finished with a machine, you can run `./run.sh show`
+    to see background processes and `./run.sh kill` to kill them.
+    The _server_ & _gateway_ machines run background processes, but the _client_ is not.
 
 
 # Other usages
