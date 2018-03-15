@@ -6,9 +6,10 @@ This is a benchmark code to compare the following API gateways:
 1. **gateway1**: Spring Cloud Gateway, 1.0.1.RELEASE
 2. **gateway2**: Spring Cloud Gateway, 2.0.0.BUILD-SNAPSHOT
 3. **zuul**: Netflix Zuul, 1.3.1
-4. **linkerd**: Linkerd 1.3.4
+4. **linkerd**: Linkerd, 1.3.4
 
-This repo forked from the @spencergibb's repo to add gateway1 to benchmark.
+This repo forked from the [Spencer Gibb's repo](https://github.com/spencergibb/spring-cloud-gateway-bench)
+to add gateway1 and make running on EC2 easier.
 
 
 
