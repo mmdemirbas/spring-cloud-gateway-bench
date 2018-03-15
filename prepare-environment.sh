@@ -31,4 +31,4 @@ sudo yum remove java-1.7.0-openjdk
 
 sudo yum install openssl-devel git go ack maven
 sudo yum groupinstall 'Development Tools'
-cd /opt && sudo git clone https://github.com/wg/wrk.git wrk && cd wrk && make && sudo cp wrk /usr/local/bin && cd - >/dev/null
+cd /opt && ( (sudo git clone "https://github.com/wg/wrk.git wrk") || (cd wrk && sudo git pull) ) && cd wrk && sudo make && sudo cp wrk /usr/local/bin && cd - >/dev/null
