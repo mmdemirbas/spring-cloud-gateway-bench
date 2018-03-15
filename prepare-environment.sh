@@ -36,4 +36,4 @@ fi
 
 sudo yum install openssl-devel git go ack maven
 sudo yum groupinstall 'Development Tools'
-command -v foo >/dev/null 2>&1 || { cd /opt && ( (sudo git clone "https://github.com/wg/wrk.git" wrk) || (cd wrk && sudo git pull) ) && cd wrk && sudo make && sudo cp wrk /usr/local/bin && cd - >/dev/null }
+command -v foo >/dev/null 2>&1 || cd /opt && ( (sudo git clone "https://github.com/wg/wrk.git" wrk) || (cd wrk && sudo git pull) ) && cd wrk && sudo make && sudo cp wrk /usr/local/bin && cd - >/dev/null
