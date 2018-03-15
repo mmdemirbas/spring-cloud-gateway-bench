@@ -276,6 +276,7 @@ function ctrl_c() {
         echo "** Trapped CTRL-C"
         kill "$(ps aux | grep './webserver.darwin-amd64' | awk '{print $2}')"
         pkill java
+        pkill wrk
         exit "1"
 }
 
