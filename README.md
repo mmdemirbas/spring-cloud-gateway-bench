@@ -84,7 +84,14 @@ zuul.txt        # report for Zuul
 ```
 
 
-Below reports are real repots generated on EC2 _t2.micro_ machines.
+If you are using Amazon EC2, you can download all reports at once with a SCP command similar to the below one:
+```
+scp "ec2-user@ec2-10-20-30-40.us-west-2.compute.amazonaws.com:/home/ec2-user/spring-cloud-gateway-bench/reports/*" .
+```
+
+### Sample Reports
+
+Below report samples are real reports generated on EC2 _t2.micro_ machines.
 
 #### no-proxy (static) example report
 
