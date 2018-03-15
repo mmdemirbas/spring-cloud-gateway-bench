@@ -359,5 +359,4 @@ if [ "${client}" = true ]; then
     runPerformanceTests
 fi
 
-ctrl_c
 echo "Script Finished"
