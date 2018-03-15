@@ -336,25 +336,27 @@ function warmup() {
     echo "JVM Warmup"
 
     total_run="10"
-    for run in {1..${total_run}}
+    sequence="$(seq ${total_run})"
+
+    for run in "$sequence"
     do
         echo "Gateway1 $run/$total_run"
         wrk -t "10" -c "200" -d 30s http://${gateway_host}:${gateway1_port}/hello.txt >> ./reports/gateway1.txt
     done
 
-    for run in {1..${total_run}}
+    for run in "$sequence"
     do
         echo "Gateway2 $run/$total_run"
         wrk -t "10" -c "200" -d 30s http://${gateway_host}:${gateway2_port}/hello.txt >> ./reports/gateway2.txt
     done
 
-    for run in {1..${total_run}}
+    for run in "$sequence"
     do
         echo "Linkerd $run/$total_run"
         wrk -H "Host: web" -t "10" -c "200" -d 30s http://${gateway_host}:${linkerd_port}/hello.txt >> ./reports/linkerd.txt
     done
 
-    for run in {1..${total_run}}
+    for run in "$sequence"
     do
         echo "Zuul $run/$total_run"
         wrk -t "10" -c "200" -d 30s http://${gateway_host}:${zuul_port}/hello.txt >> ./reports/zuul.txt
