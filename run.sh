@@ -10,6 +10,8 @@ usage() {
     echo ""
     echo "examples:"
     echo ""
+    echo "        ./run.sh -                                   # kill previously run instances of server, gateways & clients"
+    echo ""
     echo "        ./run.sh sgc                                 # run server, gateways & clients"
     echo ""
     echo "        ./run.sh sg                                  # run server & gateways"
@@ -22,6 +24,10 @@ usage() {
     exit "1"
 }
 
+function kill_instances() {
+    ps x | ack "webserver|zuul|gateway1|gateway2|linkerd|wrk" 2> /dev/null | sed 's/^[ \t]*//g' | cut -d" " -f1 | xargs kill
+}
+
 server_port="8000"
 zuul_port="8080"
 gateway1_port="8081"
@@ -30,6 +36,11 @@ linkerd_port="8083"
 
 command="$1"
 case "$command" in
+    "-")
+        kill_instances
+        exit
+        ;;
+
     "sgc")
         min_params="0"
         max_params="0"
@@ -281,9 +292,7 @@ trap ctrl_c INT
 
 function ctrl_c() {
         echo "** Trapped CTRL-C"
-        kill "$(ps aux | grep './webserver.darwin-amd64' | awk '{print $2}')"
-        pkill java
-        pkill wrk
+        kill_instances
         exit "1"
 }
 
