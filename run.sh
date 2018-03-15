@@ -10,7 +10,8 @@ usage() {
     echo ""
     echo "examples:"
     echo ""
-    echo "        ./run.sh -                                   # kill previously run instances of server, gateways & clients"
+    echo "        ./run.sh show                                # show previously run instances of server, gateways & clients"
+    echo "        ./run.sh kill                                # kill previously run instances of server, gateways & clients"
     echo ""
     echo "        ./run.sh sgc                                 # run server, gateways & clients"
     echo ""
@@ -24,8 +25,12 @@ usage() {
     exit "1"
 }
 
+function show_instances() {
+    ps x | ack "webserver|zuul|gateway1|gateway2|linkerd|wrk" 2> /dev/null
+}
+
 function kill_instances() {
-    ps x | ack "webserver|zuul|gateway1|gateway2|linkerd|wrk" 2> /dev/null | sed 's/^[ \t]*//g' | cut -d" " -f1 | xargs kill
+    show_instances | sed 's/^[ \t]*//g' | cut -d" " -f1 | xargs kill
 }
 
 server_port="8000"
@@ -36,7 +41,12 @@ linkerd_port="8083"
 
 command="$1"
 case "$command" in
-    "-")
+    "show")
+        show_instances
+        exit
+        ;;
+
+    "kill")
         kill_instances
         exit
         ;;
@@ -300,6 +310,8 @@ if [ "${server}" = true ]; then
     #Run Static web server
     runStatic
 
+    echo "Wait 3"
+    sleep "3"
     echo "Verifying static webserver is running at $server_host:$server_port"
 
     response="$(curl http://${server_host}:${server_port}/hello.txt 2> /dev/null)"
@@ -311,8 +323,6 @@ if [ "${server}" = true ]; then
     fi;
 
     echo "Web server running. OK."
-    #echo "Wait 10"
-    #sleep "10"
 fi
 
 function runGateways() {
