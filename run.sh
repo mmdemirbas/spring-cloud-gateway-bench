@@ -144,6 +144,8 @@ function detectJava() {
         exit "1"
     fi
 
+    # TODO: export your java home path in a proper shell profile file.
+    export JAVA_HOME=/usr/java/default
 }
 
 function detectMaven() {
