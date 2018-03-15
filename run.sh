@@ -22,17 +22,13 @@ usage() {
     exit "1"
 }
 
-command="$1"
-command_arg_count="$(($# - 1))"
-server_host="${2:-localhost}"
-gateway_host="${3:-${server_host}}"
-
 server_port="8000"
 zuul_port="8080"
 gateway1_port="8081"
 gateway2_port="8082"
 linkerd_port="8083"
 
+command="$1"
 case "$command" in
     "sgc")
         min_params="0"
@@ -40,6 +36,8 @@ case "$command" in
         server=true
         gateway=true
         client=true
+        server_host="localhost"
+        gateway_host="localhost"
         ;;
 
     "sg")
@@ -48,6 +46,8 @@ case "$command" in
         server=true
         gateway=true
         client=false
+        server_host="localhost"
+        gateway_host="?"
         ;;
 
     "s")
@@ -56,6 +56,8 @@ case "$command" in
         server=true
         gateway=false
         client=false
+        server_host="localhost"
+        gateway_host="?"
         ;;
 
     "g")
@@ -64,6 +66,8 @@ case "$command" in
         server=false
         gateway=true
         client=false
+        server_host="${2:-localhost}"
+        gateway_host="localhost"
         ;;
 
     "c")
@@ -72,6 +76,8 @@ case "$command" in
         server=false
         gateway=false
         client=true
+        server_host="${2:-localhost}"
+        gateway_host="${3:-${server_host}}"
         ;;
 
     "")
@@ -83,6 +89,7 @@ case "$command" in
         ;;
 esac
 
+command_arg_count="$(($# - 1))"
 if [ "$command_arg_count" -lt "${min_params}" ]; then usage "ERROR: Too few arguments"; fi
 if [ "$command_arg_count" -gt "${max_params}" ]; then usage "ERROR: Too many arguments"; fi
 
