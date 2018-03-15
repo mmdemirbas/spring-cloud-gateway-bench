@@ -10,6 +10,8 @@
 
 ########################### install JDK 8 ################################################
 
+# https://gist.github.com/rtfpessoa/17752cbf7156bdf32c59
+
 echo "Latest JDK8 version is: $(curl http://www.oracle.com/technetwork/java/javase/downloads/index.html 2>/dev/null | ack "(?<=Java SE )8\w+" -o 2>/dev/null | sort -ru | head -1)"
 
 # Download
@@ -24,11 +26,12 @@ java -version
 # TODO: export your java home path in a proper shell profile file.
 export JAVA_HOME=/usr/java/default
 
-# remove jdk 7 after installing jdk 8, or the aws-apitools will also be removed as they depend on Java on being installed (https://serverfault.com/a/727254)
-sudo yum remove java-1.7.0-openjdk
+## remove jdk 7 after installing jdk 8, or the aws-apitools will also be removed as they depend on Java on being installed (https://serverfault.com/a/727254)
+# sudo yum remove java-1.7.0-openjdk
+## removing jdk 7 also removes maven. So, leave it.
 
 ########################### install other tools ##########################################
 
 sudo yum install openssl-devel git go ack maven
 sudo yum groupinstall 'Development Tools'
-cd /opt && ( (sudo git clone "https://github.com/wg/wrk.git wrk") || (cd wrk && sudo git pull) ) && cd wrk && sudo make && sudo cp wrk /usr/local/bin && cd - >/dev/null
+cd /opt && ( (sudo git clone "https://github.com/wg/wrk.git" wrk) || (cd wrk && sudo git pull) ) && cd wrk && sudo make && sudo cp wrk /usr/local/bin && cd - >/dev/null
