@@ -180,7 +180,7 @@ function detectMaven() {
     if type -p mvn; then
         echo "Found Maven executable in PATH"
     else
-        echo "Not found Java installed"
+        echo "Not found Maven installed"
         exit "1"
     fi
 
