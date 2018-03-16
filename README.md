@@ -3,17 +3,18 @@ Spring Cloud Gateway Benchmark
 
 This is a benchmark code to compare the following API gateways:
 
-1. **gateway1**: Spring Cloud Gateway, 1.0.1.RELEASE
-2. **gateway2**: Spring Cloud Gateway, 2.0.0.BUILD-SNAPSHOT
-3. **zuul**: Netflix Zuul, 1.3.1
-4. **linkerd**: Linkerd, 1.3.4
+1. **spring**: Spring Cloud Gateway, 2.0.0.BUILD-SNAPSHOT
+2. **zuul**: Netflix Zuul, 1.3.1
+3. **linkerd**: Linkerd, 1.3.4
 
 This repo forked from the [Spencer Gibb's repo](https://github.com/spencergibb/spring-cloud-gateway-bench)
-to add gateway1 and make running on EC2 easier.
+to make running on EC2 easier.
 
 
 
-# How to use at local?
+# How to use
+
+## Local-machine usage
 
 1. Checkout this repo.
 2. Ensure JDK8, Maven, ack and wrk installed.
@@ -24,7 +25,7 @@ to add gateway1 and make running on EC2 easier.
 
 
 
-# How to use in Amazon EC2?
+## Amazon EC2 usage
 
 1.  Create 3 EC2 instances with Amazon Linux image: server, gateway, client.
 2.  Ensure machine can send http requests to each other.
@@ -45,7 +46,7 @@ to add gateway1 and make running on EC2 easier.
     The _server_ & _gateway_ machines run background processes, but the _client_ is not.
 
 
-# Other usages
+## Other usages
 
 System can be run using `./run.sh` in different ways. For example, you can
 run server and gateways in the same machine while keeping the clients in a
@@ -81,17 +82,83 @@ Results saved under `reports` directory:
 ```
 static.txt      # report for direct access (without using any API gateway)
 
-gateway1.txt    # report for Spring Cloud Gateway 1
-gateway2.txt    # report for Spring Cloud Gateway 2
+spring.txt      # report for Spring Cloud Gateway 2
 linkerd.txt     # report for Linkerd
 zuul.txt        # report for Zuul
 ```
 
 
+## Downloading reports from EC2
+
 If you are using Amazon EC2, you can download all reports at once with a SCP command similar to the below one:
 ```
-scp "ec2-user@ec2-10-20-30-40.us-west-2.compute.amazonaws.com:/home/ec2-user/spring-cloud-gateway-bench/reports/*" .
+mkdir -p reports
+scp "ec2-user@ec2-10-20-30-40.us-west-2.compute.amazonaws.com:/home/ec2-user/spring-cloud-gateway-bench/reports/*" reports
 ```
+
+## Extracting insights
+
+Once you have downloaded the reports, you can inspect them with the following command:
+
+```
+ack 'Requests/sec' reports
+```
+
+This will print something like this:
+
+```
+reports/static.txt
+7:Requests/sec:  10415.07
+
+linkerd.txt
+8:Requests/sec:   1566.09
+17:Requests/sec:   2089.59
+26:Requests/sec:   2914.94
+35:Requests/sec:   3304.35
+44:Requests/sec:   3382.17
+53:Requests/sec:   3372.34
+62:Requests/sec:   3365.01
+71:Requests/sec:   3397.53
+80:Requests/sec:   3372.06
+
+reports/zuul.txt
+8:Requests/sec:    430.26
+17:Requests/sec:    573.63
+26:Requests/sec:    774.40
+35:Requests/sec:     29.87
+
+reports/spring.txt
+8:Requests/sec:   1418.44
+17:Requests/sec:   2205.68
+25:Requests/sec:   3111.89
+34:Requests/sec:   2159.29
+42:Requests/sec:   1982.89
+51:Requests/sec:   3193.16
+59:Requests/sec:   3167.01
+68:Requests/sec:   3152.01
+76:Requests/sec:   3266.35
+```
+
+You can save this data to a lookup file which can be used to plot a chart later:
+
+```
+echo "# Serie Requests/sec" > insights-requests-per-sec.txt
+ack "Requests/sec:" -H --nogroup | cut -d":" -f1,4 | sed 's/: */ /g' >> insights-requests-per-sec.txt
+```
+
+## Plotting a chart
+
+If you want to plot a quick chart from the saved lookup data, you can use `gnuplot`.
+In MaxOS X, you can install `gnuplot` with the following commands:
+
+```
+brew cask install xquartz
+brew install gnuplot --with-x11
+```
+
+.................... And then, create a chart .........................
+
+
 
 ### Sample Reports
 
@@ -111,22 +178,7 @@ Transfer/sec:      1.47MB
 ```
 
 
-#### gateway1 example report
-
-```
-Running 30s test @ http://172.31.36.74:8081/hello.txt
-  10 threads and 200 connections
-  Thread Stats   Avg      Stdev     Max   +/- Stdev
-    Latency   135.88ms   91.06ms 815.37ms   67.83%
-    Req/Sec   156.03     34.82   313.00     70.27%
-  46552 requests in 30.05s, 11.19MB read
-  Non-2xx or 3xx responses: 46552
-Requests/sec:   1549.39
-Transfer/sec:    381.54KB
-```
-
-
-#### gateway2 example report
+#### spring example report
 
 ```
 Running 30s test @ http://172.31.36.74:8082/hello.txt
@@ -179,12 +231,16 @@ If you need to inspect output for some reason, you can find them under `logs` di
 Different log files created where each one named after the corresponding component:
 
 ```bash
-gateway1.log          # gateway1 runtime output
-gateway1-build.log    # gateway1 maven output
-gateway2.log          # gateway2 maven output
-gateway2-build.log    # gateway2 runtime output
+spring.log            # spring maven output
+spring-build.log      # spring runtime output
 linkerd.log           # linkerd runtime output
 webserver.log         # webserver runtime output
 zuul.log              # zuul runtime output
 zuul-build.log        # zuul maven output
 ```
+
+
+# TODO
+
+1. Add Gateway version subject to the blog post?
+2. Interpret results automatically, may be using a kotlin code. Chart may be generated.
