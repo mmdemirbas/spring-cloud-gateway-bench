@@ -21,9 +21,15 @@ else
     ## removing jdk 7 also removes maven. So, leave it.
 fi
 
+########################### install Maven ################################################
+sudo wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d/epel-apache-maven.repo
+sudo sed -i s/\$releasever/6/g /etc/yum.repos.d/epel-apache-maven.repo
+sudo yum install -y apache-maven
+mvn --version
+
 ########################### install other tools ##########################################
 
-sudo yum -y install openssl-devel git go ack maven
+sudo yum -y install openssl-devel git go ack
 sudo yum -y groupinstall 'Development Tools'
 sudo yum -y update
 command -v foo >/dev/null 2>&1 || cd /opt && ( (sudo git clone "https://github.com/wg/wrk.git" wrk) || (cd wrk && sudo git pull) ) && cd wrk && sudo make && sudo cp wrk /usr/local/bin && cd - >/dev/null
