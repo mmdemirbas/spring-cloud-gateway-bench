@@ -9,12 +9,9 @@ if [ "$(java -version 2>&1 | head -1)" = "java version \"1.8.0.162\"" ]; then
 else
     # https://gist.github.com/rtfpessoa/17752cbf7156bdf32c59
     wget --no-cookies --header "Cookie: gpw_e24=xxx; oraclelicense=accept-securebackup-cookie;" "http://download.oracle.com/otn-pub/java/jdk/8u162-b12/0da788060d494f5095bf8624735fa2f1/jdk-8u162-linux-x64.rpm"
-    java -version
     sudo rpm -i jdk-8u162-linux-x64.rpm
-    java -version
     sudo /usr/sbin/alternatives --install /usr/bin/java java /usr/java/jdk1.8.0_162/bin/java 20000
-    sudo /usr/sbin/alternatives --config java
-    java -version
+    sudo /usr/sbin/alternatives --set java /usr/java/jdk1.8.0_162/bin/java
 
     # TODO: export your java home path in a proper shell profile file.
     export JAVA_HOME=/usr/java/default
