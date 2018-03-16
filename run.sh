@@ -329,21 +329,21 @@ function warmup() {
 
     echo "JVM Warmup"
 
-    total_run="10"
+    total_run="11"
 
-    for ((run=1;run<=$total_run;run++))
+    for ((run=1;run<$total_run;run++))
     do
         echo "Spring $run/$total_run"
         wrk -t "10" -c "200" -d 30s http://${gateway_host}:${spring_port}/hello.txt >> ./reports/spring.txt
     done
 
-    for ((run=1;run<=$total_run;run++))
+    for ((run=1;run<$total_run;run++))
     do
         echo "Linkerd $run/$total_run"
         wrk -H "Host: web" -t "10" -c "200" -d 30s http://${gateway_host}:${linkerd_port}/hello.txt >> ./reports/linkerd.txt
     done
 
-    for ((run=1;run<=$total_run;run++))
+    for ((run=1;run<$total_run;run++))
     do
         echo "Zuul $run/$total_run"
         wrk -t "10" -c "200" -d 30s http://${gateway_host}:${zuul_port}/hello.txt >> ./reports/zuul.txt
@@ -352,7 +352,7 @@ function warmup() {
 
 function runPerformanceTests() {
 
-    for ((run=1;run<=$total_run;run++))
+    for ((run=1;run<$total_run;run++))
     do
         echo "Static results $run/$total_run"
         wrk -t "10" -c "200" -d 30s  http://${server_host}:${server_port}/hello.txt > ./reports/static.txt
