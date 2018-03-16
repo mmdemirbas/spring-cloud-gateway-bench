@@ -6,7 +6,7 @@ spring:
     gateway:
       routes:
       - id: all_route
-        uri: http://1.2.3.4:8000
+        uri: http://localhost:8000
         predicates:
         - Path=/**
 
