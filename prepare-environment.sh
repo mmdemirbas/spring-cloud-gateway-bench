@@ -1,18 +1,10 @@
 #!/usr/bin/env bash
 
-
-##### start ################
-# sudo yum install git
-# git clone https://github.com/mmdemirbas/spring-cloud-gateway-bench.git && cd spring-cloud-gateway-bench
-# ./prepare-environment.sh
-
-
-
 ########################### install JDK 8 ################################################
 
 echo "Latest JDK8 version is: $(curl http://www.oracle.com/technetwork/java/javase/downloads/index.html 2>/dev/null | ack "(?<=Java SE )8\w+" -o 2>/dev/null | sort -ru | head -1)"
 
-if [ "$(java -version 2>&1 | head -1)"="java version \"1.8.0.162\"" ]; then
+if [ "$(java -version 2>&1 | head -1)" = "java version \"1.8.0.162\"" ]; then
     echo "jdk1.8.0_162 already installed."
 else
     # https://gist.github.com/rtfpessoa/17752cbf7156bdf32c59
@@ -34,7 +26,7 @@ fi
 
 ########################### install other tools ##########################################
 
-sudo yum install openssl-devel git go ack maven
-sudo yum groupinstall 'Development Tools'
-sudo yum update
+sudo yum -y install openssl-devel git go ack maven
+sudo yum -y groupinstall 'Development Tools'
+sudo yum -y update
 command -v foo >/dev/null 2>&1 || cd /opt && ( (sudo git clone "https://github.com/wg/wrk.git" wrk) || (cd wrk && sudo git pull) ) && cd wrk && sudo make && sudo cp wrk /usr/local/bin && cd - >/dev/null
