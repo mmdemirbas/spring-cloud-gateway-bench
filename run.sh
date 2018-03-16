@@ -26,7 +26,7 @@ usage() {
 }
 
 function show_instances() {
-    ps x | ack "webserver|zuul|spring|linkerd|wrk" 2> /dev/null
+    ps x | ack "webserver|zuul|spring|linkerd|wrk|run\.sh" 2> /dev/null
 }
 
 function kill_instances() {
