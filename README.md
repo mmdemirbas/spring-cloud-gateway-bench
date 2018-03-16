@@ -92,8 +92,7 @@ zuul.txt        # report for Zuul
 
 If you are using Amazon EC2, you can download all reports at once with a SCP command similar to the below one:
 ```
-mkdir -p reports
-scp "ec2-user@ec2-10-20-30-40.us-west-2.compute.amazonaws.com:/home/ec2-user/spring-cloud-gateway-bench/reports/*" reports
+scp "ec2-user@ec2-10-20-30-40.us-west-2.compute.amazonaws.com:/home/ec2-user/spring-cloud-gateway-bench/reports/*" reports-remote
 ```
 
 ## Extracting insights
@@ -101,7 +100,7 @@ scp "ec2-user@ec2-10-20-30-40.us-west-2.compute.amazonaws.com:/home/ec2-user/spr
 Once you have downloaded the reports, you can inspect them with the following command:
 
 ```
-ack 'Requests/sec' reports
+ack 'Requests/sec' reports-remote
 ```
 
 This will print something like this:
@@ -139,25 +138,18 @@ reports/spring.txt
 76:Requests/sec:   3266.35
 ```
 
-You can save this data to a lookup file which can be used to plot a chart later:
+You can save this data to summary file with the following command:
 
 ```
-echo "# Serie Requests/sec" > insights-requests-per-sec.txt
-ack "Requests/sec:" -H --nogroup | cut -d":" -f1,4 | sed 's/: */ /g' >> insights-requests-per-sec.txt
+cd reports-remote
+ack "Requests/sec:" -H --nogroup | cut -d":" -f1,4 | sed 's/.txt: */,/g' >> summary-list.csv
 ```
 
 ## Plotting a chart
 
-If you want to plot a quick chart from the saved lookup data, you can use `gnuplot`.
-In MaxOS X, you can install `gnuplot` with the following commands:
+You can use [Plot.ly](https://plot.ly/create/) online service to create plots.
 
-```
-brew cask install xquartz
-brew install gnuplot --with-x11
-```
-
-.................... And then, create a chart .........................
-
+To plot your data, you need to transform `summary-list.csv` into `summary-summary-table.csv` _manually_.
 
 
 ### Sample Reports
@@ -238,9 +230,3 @@ webserver.log         # webserver runtime output
 zuul.log              # zuul runtime output
 zuul-build.log        # zuul maven output
 ```
-
-
-# TODO
-
-1. Add Gateway version subject to the blog post?
-2. Interpret results automatically, may be using a kotlin code. Chart may be generated.

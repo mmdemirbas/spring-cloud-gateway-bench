@@ -1,0 +1,80 @@
+Running 30s test @ http://54.202.181.88:8083/hello.txt
+  10 threads and 200 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency   151.43ms  183.15ms   1.87s    94.01%
+    Req/Sec   173.73     59.46   330.00     73.12%
+  49060 requests in 30.05s, 8.89MB read
+  Socket errors: connect 0, read 0, write 0, timeout 37
+Requests/sec:   1632.64
+Transfer/sec:    302.93KB
+Running 30s test @ http://54.202.181.88:8083/hello.txt
+  10 threads and 200 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    95.81ms   50.28ms 678.69ms   72.96%
+    Req/Sec   214.61     41.09   373.00     70.33%
+  63763 requests in 30.04s, 11.56MB read
+  Non-2xx or 3xx responses: 17
+Requests/sec:   2122.27
+Transfer/sec:    394.10KB
+Running 30s test @ http://54.202.181.88:8083/hello.txt
+  10 threads and 200 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    68.61ms   38.86ms 616.32ms   71.76%
+    Req/Sec   300.70     56.24   490.00     66.12%
+  89404 requests in 30.04s, 16.20MB read
+  Non-2xx or 3xx responses: 9
+Requests/sec:   2976.03
+Transfer/sec:    552.36KB
+Running 30s test @ http://54.202.181.88:8083/hello.txt
+  10 threads and 200 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    62.65ms   35.99ms 505.77ms   72.24%
+    Req/Sec   329.12     48.23   494.00     74.31%
+  97969 requests in 30.04s, 17.76MB read
+  Non-2xx or 3xx responses: 15
+Requests/sec:   3261.69
+Transfer/sec:    605.51KB
+Running 30s test @ http://54.202.181.88:8083/hello.txt
+  10 threads and 200 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    60.76ms   33.97ms 440.05ms   69.80%
+    Req/Sec   337.41     45.21   484.00     71.30%
+  100573 requests in 30.03s, 18.23MB read
+  Non-2xx or 3xx responses: 6
+Requests/sec:   3348.86
+Transfer/sec:    621.50KB
+Running 30s test @ http://54.202.181.88:8083/hello.txt
+  10 threads and 200 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    60.73ms   34.65ms 456.86ms   70.77%
+    Req/Sec   338.68     44.79   500.00     74.22%
+  100859 requests in 30.04s, 18.29MB read
+  Non-2xx or 3xx responses: 19
+Requests/sec:   3357.71
+Transfer/sec:    623.39KB
+Running 30s test @ http://54.202.181.88:8083/hello.txt
+  10 threads and 200 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    61.71ms   36.29ms 442.17ms   73.15%
+    Req/Sec   335.70     44.97   500.00     73.34%
+  99818 requests in 30.04s, 18.10MB read
+  Non-2xx or 3xx responses: 23
+Requests/sec:   3323.00
+Transfer/sec:    617.02KB
+Running 30s test @ http://54.202.181.88:8083/hello.txt
+  10 threads and 200 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    60.08ms   32.64ms 328.80ms   68.59%
+    Req/Sec   339.56     43.20   490.00     73.61%
+  101313 requests in 30.04s, 18.36MB read
+Requests/sec:   3372.09
+Transfer/sec:    625.68KB
+Running 30s test @ http://54.202.181.88:8083/hello.txt
+  10 threads and 200 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    60.60ms   33.04ms 311.17ms   69.59%
+    Req/Sec   337.40     44.53   494.00     72.21%
+  100583 requests in 30.04s, 18.23MB read
+  Non-2xx or 3xx responses: 15
+Requests/sec:   3348.44
+Transfer/sec:    621.59KB
