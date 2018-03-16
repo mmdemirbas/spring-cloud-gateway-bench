@@ -31,6 +31,11 @@ to make running on EC2 easier.
 2.  Ensure machine can send http requests to each other.
     Add corresponding rules to their security groups if needed.
 3.  Checkout this repo in each machine.
+    ```
+    sudo yum install git
+    git clone https://github.com/mmdemirbas/spring-cloud-gateway-bench.git
+    cd spring-cloud-gateway-bench
+    ```
 4.  Run `./prepare-environment.sh` to ensure JDK8, Maven, ack and wrk installed in each machine.
 5.  Run `./run.sh s` in _server_ machine.
 6.  Run `./run.sh g <server-host>` in _gateway_ machine replacing
