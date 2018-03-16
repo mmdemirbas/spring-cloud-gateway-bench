@@ -26,7 +26,7 @@ usage() {
 }
 
 function show_instances() {
-    ps x | ack "webserver|zuul|gateway1|gateway2|linkerd|wrk" 2> /dev/null
+    ps x | ack "webserver|zuul|spring|linkerd|wrk" 2> /dev/null
 }
 
 function kill_instances() {
@@ -35,8 +35,7 @@ function kill_instances() {
 
 server_port="8000"
 zuul_port="8080"
-gateway1_port="8081"
-gateway2_port="8082"
+spring_port="8082"
 linkerd_port="8083"
 
 command="$1"
@@ -257,31 +256,17 @@ function runZuul() {
     cd -
 }
 
-function runGateway1() {
+function runSpring() {
 
-    echo "Running Spring Gateway 1 at $gateway_host:$gateway1_port"
+    echo "Running Spring Gateway 2 at $gateway_host:$spring_port"
 
-    cd gateway1
+    cd spring
     echo "> configure"
     sed -i "s/\(\s*uri:\).*/\1 http:\/\/$server_host:$server_port/g" "./src/main/resources/application.yml"
     echo "> build"
-    mvn clean package > "../logs/gateway1-build.log"
+    mvn clean package > "../logs/spring-build.log"
     echo "> run"
-    java -jar "./target/gateway1-0.0.1-SNAPSHOT.jar" > "../logs/gateway1.log" &
-    cd -
-}
-
-function runGateway2() {
-
-    echo "Running Spring Gateway 2 at $gateway_host:$gateway2_port"
-
-    cd gateway2
-    echo "> configure"
-    sed -i "s/\(\s*uri:\).*/\1 http:\/\/$server_host:$server_port/g" "./src/main/resources/application.yml"
-    echo "> build"
-    mvn clean package > "../logs/gateway2-build.log"
-    echo "> run"
-    java -jar "./target/gateway2-0.0.1-SNAPSHOT.jar" > "../logs/gateway2.log" &
+    java -jar "./target/spring-0.0.1-SNAPSHOT.jar" > "../logs/spring.log" &
     cd -
 }
 
@@ -329,8 +314,7 @@ function runGateways() {
 
     echo "Run Gateways"
     runZuul
-    runGateway1
-    runGateway2
+    runSpring
     runLinkerd
 
 }
@@ -349,14 +333,8 @@ function warmup() {
 
     for ((run=1;run<$total_run;run++))
     do
-        echo "Gateway1 $run/$total_run"
-        wrk -t "10" -c "200" -d 30s http://${gateway_host}:${gateway1_port}/hello.txt >> ./reports/gateway1.txt
-    done
-
-    for ((run=1;run<$total_run;run++))
-    do
-        echo "Gateway2 $run/$total_run"
-        wrk -t "10" -c "200" -d 30s http://${gateway_host}:${gateway2_port}/hello.txt >> ./reports/gateway2.txt
+        echo "Spring $run/$total_run"
+        wrk -t "10" -c "200" -d 30s http://${gateway_host}:${spring_port}/hello.txt >> ./reports/spring.txt
     done
 
     for ((run=1;run<$total_run;run++))
