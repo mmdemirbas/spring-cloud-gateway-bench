@@ -30,24 +30,25 @@ to make running on EC2 easier.
 1.  Create 3 EC2 instances with Amazon Linux image: server, gateway, client.
 2.  Ensure machine can send http requests to each other.
     Add corresponding rules to their security groups if needed.
-3.  Checkout this repo in each machine.
+3.  Checkout this repo in each machine and ensure JDK8, Maven, ack and wrk installed
+    running `./prepare-environment.sh`.
     ```
     sudo yum -y install git ; \
     git clone https://github.com/mmdemirbas/spring-cloud-gateway-bench.git ; \
     cd spring-cloud-gateway-bench
+    ./prepare-environment.sh
     ```
-4.  Run `./prepare-environment.sh` to ensure JDK8, Maven, ack and wrk installed in each machine.
-5.  Run `./run.sh s` in _server_ machine.
-6.  Run `./run.sh g <server-host>` in _gateway_ machine replacing
+4.  Run `./run.sh s` in _server_ machine.
+5.  Run `./run.sh g <server-host>` in _gateway_ machine replacing
     `<server-host>` with the actual IP address or hostname of the _server_ machine.
-7.  Wait to see `Script Finished` message in _gateway_ machine's console.
-8.  Run `./run.sh c <server-host> <gateway-host>` in _client_ machine replacing
+6.  Wait to see `Script Finished` message in _gateway_ machine's console.
+7.  Run `./run.sh c <server-host> <gateway-host>` in _client_ machine replacing
     `<server-host>` with the actual IP address or hostname of the _server_ machine and
     `<gateway-host>` with the actual IP address or hostname of the _gateway_ machine.
-9.  Wait to see `Script Finished` message in _client_ machine's console.
-10. Inspect reports saved under `./reports/local` directory.
+8.  Wait to see `Script Finished` message in _client_ machine's console.
+9.  Inspect reports saved under `./reports/local` directory.
     See _Inspecting Results_ section for details.
-11. When you finished with a machine, you can run `./run.sh show`
+10. When you finished with a machine, you can run `./run.sh show`
     to see background processes and `./run.sh kill` to kill them.
     The _server_ & _gateway_ machines run background processes, but the _client_ is not.
 
