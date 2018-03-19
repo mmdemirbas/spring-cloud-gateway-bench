@@ -1,0 +1,8 @@
+Running 30s test @ http://34.213.78.140:8000/hello.txt
+  10 threads and 200 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    50.45ms   92.91ms 908.69ms   91.09%
+    Req/Sec     1.12k   556.34     2.27k    58.04%
+  303508 requests in 30.03s, 42.84MB read
+Requests/sec:  10105.62
+Transfer/sec:      1.43MB
