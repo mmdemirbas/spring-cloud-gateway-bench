@@ -35,7 +35,7 @@ to make running on EC2 easier.
     ```
     sudo yum -y install git ; \
     git clone https://github.com/mmdemirbas/spring-cloud-gateway-bench.git ; \
-    cd spring-cloud-gateway-bench
+    cd spring-cloud-gateway-bench ; \
     ./prepare-environment.sh
     ```
 4.  Run `./run.sh s` in _server_ machine.
