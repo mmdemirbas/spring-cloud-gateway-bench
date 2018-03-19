@@ -165,7 +165,6 @@ If you need to inspect output for some reason, you can find them under `logs` di
 Different log files created where each one named after the corresponding component:
 
 ```bash
-```bash
 spring.log            # spring maven output
 spring-build.log      # spring runtime output
 linkerd.log           # linkerd runtime output
