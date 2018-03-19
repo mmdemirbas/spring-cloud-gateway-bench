@@ -124,7 +124,7 @@ to use later for plotting with the following command:
 
 ```
 cd reports/remote
-ack "Requests/sec:" -H --nogroup | cut -d":" -f1,4 | sed 's/.txt: */,/g' >> summary-list.csv
+ack "Requests/sec:" -H --nogroup | cut -d":" -f1,4 | sed 's/.txt: */,/g' > summary-list.csv
 ```
 
 
@@ -137,15 +137,15 @@ or saved to the `reports/charts` directory depending on the selected
 output mode. Below charts generated from real data in this way:
 
 ![](reports/charts/local.png)
-
 ![](reports/charts/t2.micro.png)
+![](reports/charts/m4.large.png)
 
 ![](reports/charts/c4.large.png)
+![](reports/charts/c4.xlarge.png)
+![](reports/charts/c4.2xlarge.png)
 
 ![](reports/charts/c5.large.png)
-
 ![](reports/charts/c5.xlarge.png)
-
 ![](reports/charts/c5.2xlarge.png)
 
 

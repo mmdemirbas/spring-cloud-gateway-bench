@@ -1,0 +1,88 @@
+Running 30s test @ http://52.88.252.110:8080/hello.txt
+  10 threads and 200 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency     0.00us    0.00us   0.00us    -nan%
+    Req/Sec     3.53     12.22    50.00     94.12%
+  40 requests in 30.05s, 10.70KB read
+  Socket errors: connect 0, read 0, write 0, timeout 40
+  Non-2xx or 3xx responses: 40
+Requests/sec:      1.33
+Transfer/sec:     364.67B
+Running 30s test @ http://52.88.252.110:8080/hello.txt
+  10 threads and 200 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    73.12ms  183.24ms   1.86s    91.85%
+    Req/Sec   239.36    145.82   640.00     63.88%
+  8164 requests in 30.05s, 1.28MB read
+  Socket errors: connect 0, read 0, write 0, timeout 235
+  Non-2xx or 3xx responses: 42
+Requests/sec:    271.66
+Transfer/sec:     43.74KB
+Running 30s test @ http://52.88.252.110:8080/hello.txt
+  10 threads and 200 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    81.72ms  163.13ms   1.96s    89.15%
+    Req/Sec   546.85    176.20     1.17k    69.59%
+  87080 requests in 30.04s, 13.64MB read
+  Socket errors: connect 0, read 0, write 0, timeout 20
+  Non-2xx or 3xx responses: 20
+Requests/sec:   2898.66
+Transfer/sec:    464.79KB
+Running 30s test @ http://52.88.252.110:8080/hello.txt
+  10 threads and 200 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency     0.00us    0.00us   0.00us    -nan%
+    Req/Sec     0.00      0.00     0.00    100.00%
+  24 requests in 30.06s, 6.42KB read
+  Socket errors: connect 0, read 0, write 0, timeout 24
+  Non-2xx or 3xx responses: 24
+Requests/sec:      0.80
+Transfer/sec:     218.79B
+Running 30s test @ http://52.88.252.110:8080/hello.txt
+  10 threads and 200 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency     0.00us    0.00us   0.00us    -nan%
+    Req/Sec     0.00      0.00     0.00      -nan%
+  0 requests in 30.06s, 0.00B read
+Requests/sec:      0.00
+Transfer/sec:       0.00B
+Running 30s test @ http://52.88.252.110:8080/hello.txt
+  10 threads and 200 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency     0.00us    0.00us   0.00us    -nan%
+    Req/Sec     0.00      0.00     0.00      -nan%
+  0 requests in 30.06s, 0.00B read
+Requests/sec:      0.00
+Transfer/sec:       0.00B
+Running 30s test @ http://52.88.252.110:8080/hello.txt
+  10 threads and 200 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency     0.00us    0.00us   0.00us    -nan%
+    Req/Sec     0.00      0.00     0.00      -nan%
+  0 requests in 30.06s, 0.00B read
+Requests/sec:      0.00
+Transfer/sec:       0.00B
+Running 30s test @ http://52.88.252.110:8080/hello.txt
+  10 threads and 200 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency     0.00us    0.00us   0.00us    -nan%
+    Req/Sec     0.00      0.00     0.00      -nan%
+  0 requests in 30.06s, 0.00B read
+Requests/sec:      0.00
+Transfer/sec:       0.00B
+Running 30s test @ http://52.88.252.110:8080/hello.txt
+  10 threads and 200 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency     0.00us    0.00us   0.00us    -nan%
+    Req/Sec     0.00      0.00     0.00      -nan%
+  0 requests in 30.06s, 0.00B read
+Requests/sec:      0.00
+Transfer/sec:       0.00B
+Running 30s test @ http://52.88.252.110:8080/hello.txt
+  10 threads and 200 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency     0.00us    0.00us   0.00us    -nan%
+    Req/Sec     0.00      0.00     0.00      -nan%
+  0 requests in 30.06s, 0.00B read
+Requests/sec:      0.00
+Transfer/sec:       0.00B

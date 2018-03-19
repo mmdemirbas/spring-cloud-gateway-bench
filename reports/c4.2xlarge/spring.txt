@@ -1,0 +1,82 @@
+Running 30s test @ http://54.218.27.79:8082/hello.txt
+  10 threads and 200 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency   135.44ms  236.45ms   1.67s    88.39%
+    Req/Sec   741.03    478.76     2.63k    62.92%
+  152045 requests in 30.05s, 21.46MB read
+Requests/sec:   5059.96
+Transfer/sec:    731.34KB
+Running 30s test @ http://54.218.27.79:8082/hello.txt
+  10 threads and 200 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency   134.12ms  204.04ms   1.14s    86.11%
+    Req/Sec   640.97    504.43     3.08k    74.61%
+  131359 requests in 30.05s, 18.54MB read
+Requests/sec:   4371.80
+Transfer/sec:    631.86KB
+Running 30s test @ http://54.218.27.79:8082/hello.txt
+  10 threads and 200 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    64.87ms   92.03ms 594.57ms   88.44%
+    Req/Sec   716.46    457.74     4.54k    70.77%
+  192230 requests in 30.04s, 27.13MB read
+Requests/sec:   6399.25
+Transfer/sec:      0.90MB
+Running 30s test @ http://54.218.27.79:8082/hello.txt
+  10 threads and 200 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    87.52ms  134.98ms 995.54ms   88.42%
+    Req/Sec   738.61    508.93     3.01k    73.58%
+  175161 requests in 30.04s, 24.72MB read
+  Non-2xx or 3xx responses: 1
+Requests/sec:   5830.43
+Transfer/sec:    842.72KB
+Running 30s test @ http://54.218.27.79:8082/hello.txt
+  10 threads and 200 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency   133.79ms  204.87ms   1.13s    84.97%
+    Req/Sec   761.86    500.02     2.47k    62.23%
+  149141 requests in 30.05s, 21.05MB read
+Requests/sec:   4963.34
+Transfer/sec:    717.36KB
+Running 30s test @ http://54.218.27.79:8082/hello.txt
+  10 threads and 200 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency   179.69ms  251.09ms   1.42s    85.51%
+    Req/Sec   437.02    359.52     2.66k    76.54%
+  87190 requests in 30.05s, 12.31MB read
+Requests/sec:   2901.39
+Transfer/sec:    419.34KB
+Running 30s test @ http://54.218.27.79:8082/hello.txt
+  10 threads and 200 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    81.80ms  158.54ms   1.11s    89.40%
+    Req/Sec   559.24    381.73     2.40k    73.59%
+  66620 requests in 30.05s, 9.40MB read
+Requests/sec:   2216.79
+Transfer/sec:    320.39KB
+Running 30s test @ http://54.218.27.79:8082/hello.txt
+  10 threads and 200 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency     0.00us    0.00us   0.00us    -nan%
+    Req/Sec     0.00      0.00     0.00      -nan%
+  0 requests in 30.05s, 0.00B read
+Requests/sec:      0.00
+Transfer/sec:       0.00B
+Running 30s test @ http://54.218.27.79:8082/hello.txt
+  10 threads and 200 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency     0.00us    0.00us   0.00us    -nan%
+    Req/Sec     0.00      0.00     0.00      -nan%
+  0 requests in 30.05s, 0.00B read
+Requests/sec:      0.00
+Transfer/sec:       0.00B
+Running 30s test @ http://54.218.27.79:8082/hello.txt
+  10 threads and 200 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    27.23ms   52.50ms 440.59ms   84.25%
+    Req/Sec     0.94k   469.24     2.16k    66.41%
+  88380 requests in 30.05s, 12.47MB read
+  Socket errors: connect 0, read 0, write 0, timeout 200
+Requests/sec:   2941.08
+Transfer/sec:    425.08KB
