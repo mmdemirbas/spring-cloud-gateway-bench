@@ -12,6 +12,7 @@
     <modules>
         <module>spring</module>
         <module>zuul</module>
+        <module>inspect</module>
     </modules>
 
 </project>
